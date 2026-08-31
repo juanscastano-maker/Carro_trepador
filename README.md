@@ -6,23 +6,10 @@ Este repositorio contiene la arquitectura de software, modelos de simulación, d
 
 ## 📸 Vista Previa
 
-*(Reemplaza este enlace por una imagen o GIF de tu robot ubicado en la carpeta docs)*  
-![Robot Trepador](docs/robot_preview.png)
+*(no tenemos aun)*  
 
 ---
 
-## 🛠️ Especificaciones Técnicas
-
-* **Sistema Operativo Base:** Ubuntu 22.04 LTS
-* **Framework de Robótica:** ROS 2 + micro-ROS
-* **Microcontrolador:** ESP32-S3
-* **Sensores:** 2x IMU MPU6050 (Lectura I2C)
-* **Actuadores:** 
-  * Motores N20 con encoder (Tracción)
-  * Motores BLDC + ESC (Sistema de Succión)
-* **Simulación:** Gazebo + RViz
-
----
 
 ## 📁 Estructura del Repositorio
 
