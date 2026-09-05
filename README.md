@@ -24,7 +24,7 @@ Carro_trepador/
 │       ├── carro_trepador_description/
 │       ├── carro_trepador_interfaces/
 │       ├── carro_trepador_control/
-│        └── carro_trepador_teleop/
+│       └── carro_trepador_teleop/
 │ 
 ├── hardware/                    # Diseños CAD (STEP/STL) del chasis y lista de materiales (BOM)
 │ 
