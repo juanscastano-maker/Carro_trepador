@@ -3,9 +3,20 @@
 <package format="3">
   <name>carro_trepador_bringup</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Archivos launch y configuración para arrancar todo el sistema del robot trepador en el PC.</description>
   <maintainer email="juan_s.castano@uao.edu.co">juan</maintainer>
-  <license>TODO: License declaration</license>
+  <license>Apache-2.0</license>
+
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>carro_trepador_description</exec_depend>
+  <exec_depend>carro_trepador_control</exec_depend>
+  <exec_depend>carro_trepador_teleop</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>

@@ -3,11 +3,15 @@
 <package format="3">
   <name>carro_trepador_description</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Modelo URDF del robot trepador articulado de dos módulos (articulación central pasiva), con launch para RViz2. La simulación está en carro_trepador_simulation.</description>
   <maintainer email="juan_s.castano@uao.edu.co">juan</maintainer>
-  <license>TODO: License declaration</license>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+  <exec_depend>rviz2</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

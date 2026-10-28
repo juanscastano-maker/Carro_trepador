@@ -1,0 +1,442 @@
+<?xml version="1.0"?>
+<!--
+  Carro Trepador: modelo URDF para ROS 2 Humble (RViz y Gazebo Fortress).
+
+  Origen: exportación de SolidWorks (sw_urdf_exporter) del ensamble Ensamblaje1_juan,
+  adaptada a ROS 2. Cambios respecto a la exportación:
+    - Rutas de mallas apuntan a carro_trepador_description (antes Ensamblaje1_juan).
+    - Mallas visuales: las originales de SolidWorks, sin modificar.
+    - Colisiones simplificadas: cajas para los chasis y cilindros para las ruedas.
+    - Ruedas traseras pasan de fixed a continuous (giran libres, sin motor).
+    - Ejes de las ruedas invertidos para que velocidad positiva = avanzar.
+    - Agregados base_link (raíz sin inercia), marcos de las IMUs y bloques de Gazebo.
+  Masas e inercias: las calculó SolidWorks; no se han verificado con el robot real.
+
+  Convención de nombres (heredada de la exportación, se respeta tal cual en el código):
+    chasis_trasero_joint = articulación central PASIVA entre los dos módulos.
+    Algunos links terminan en "_Link" (L mayúscula) y otros en "_link".
+-->
+<robot name="carro_trepador">
+
+  <!-- Raíz del robot, a nivel del suelo bajo el módulo trasero. Sin inercia porque
+       KDL (robot_state_publisher) no admite inercia en el link raíz. -->
+  <link name="base_link"/>
+  <joint name="base_joint" type="fixed">
+    <origin xyz="0 0 0.008" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="chasis_trasero_link"/>
+  </joint>
+
+  <!-- ===================== Módulo trasero ===================== -->
+  <!-- Colisión: caja del chasis, levantada 4 mm del suelo para que no roce al avanzar -->
+  <link name="chasis_trasero_link">
+    <inertial>
+      <origin xyz="-0.0158576 0.000531638 0.0101393" rpy="0 0 0"/>
+      <mass value="0.195854"/>
+      <inertia ixx="0.000166021" ixy="5.73581e-07" ixz="-4.25011e-06" iyy="0.000177223" iyz="-1.04426e-07" izz="0.000321224"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://carro_trepador_description/meshes/chasis_trasero_link.STL"/>
+      </geometry>
+      <material name="chasis_trasero_link_color">
+        <color rgba="0.698039 0.698039 0.698039 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0057 0 0.01465" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.163 0.18 0.0373"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Rueda trasera derecha: LIBRE (sin motor) -->
+  <link name="rueda_trasera_derecha_link">
+    <inertial>
+      <origin xyz="-2.35922e-16 -2.42861e-17 -0.00995722" rpy="0 0 0"/>
+      <mass value="0.010419"/>
+      <inertia ixx="1.25232e-06" ixy="1.32349e-23" ixz="-7.33877e-22" iyy="1.25232e-06" iyz="-1.49829e-22" izz="1.46759e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://carro_trepador_description/meshes/rueda_trasera_derecha_link.STL"/>
+      </geometry>
+      <material name="rueda_trasera_derecha_link_color">
+        <color rgba="0.792157 0.819608 0.933333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.011" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.015" length="0.022"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="rueda_trasera_derecha_joint" type="continuous">
+    <origin xyz="-0.064324 -0.0939 0.007" rpy="1.5708 -0.097375 0"/>
+    <parent link="chasis_trasero_link"/>
+    <child link="rueda_trasera_derecha_link"/>
+    <!-- Eje invertido respecto a la exportación: velocidad positiva = avanzar -->
+    <axis xyz="0 0 -1"/>
+    <dynamics damping="0.0001" friction="0.0"/>
+  </joint>
+
+  <!-- Rueda trasera izquierda: LIBRE (sin motor) -->
+  <link name="rueda_trasera_izquierda_link">
+    <inertial>
+      <origin xyz="-1.11022e-16 -1.96512e-16 0.00995722" rpy="0 0 0"/>
+      <mass value="0.010419"/>
+      <inertia ixx="1.25232e-06" ixy="-1.45953e-22" ixz="3.44709e-22" iyy="1.25232e-06" iyz="8.68983e-22" izz="1.46759e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://carro_trepador_description/meshes/rueda_trasera_izquierda_link.STL"/>
+      </geometry>
+      <material name="rueda_trasera_izquierda_link_color">
+        <color rgba="0.792157 0.819608 0.933333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.011" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.015" length="0.022"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="rueda_trasera_izquierda_joint" type="continuous">
+    <origin xyz="-0.064324 0.0939 0.007" rpy="1.5708 0 0"/>
+    <parent link="chasis_trasero_link"/>
+    <child link="rueda_trasera_izquierda_link"/>
+    <!-- Eje invertido respecto a la exportación: velocidad positiva = avanzar -->
+    <axis xyz="0 0 -1"/>
+    <dynamics damping="0.0001" friction="0.0"/>
+  </joint>
+
+  <!-- Rueda media derecha: MOTOR N20 -->
+  <link name="rueda_media_derecha_link">
+    <inertial>
+      <origin xyz="1.59595e-16 -1.47695e-16 -0.00940086" rpy="0 0 0"/>
+      <mass value="0.0101299"/>
+      <inertia ixx="1.16862e-06" ixy="1.81635e-22" ixz="5.89049e-22" iyy="1.16862e-06" iyz="-5.44704e-22" izz="1.46736e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://carro_trepador_description/meshes/rueda_media_derecha_link.STL"/>
+      </geometry>
+      <material name="rueda_media_derecha_link_color">
+        <color rgba="0.694118 0.0980392 0.0980392 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.011" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.015" length="0.022"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="rueda_media_derecha_joint" type="continuous">
+    <origin xyz="0.075676 -0.0939 0.007" rpy="1.5708 0 0"/>
+    <parent link="chasis_trasero_link"/>
+    <child link="rueda_media_derecha_link"/>
+    <!-- Eje invertido respecto a la exportación: velocidad positiva = avanzar -->
+    <axis xyz="0 0 -1"/>
+    <dynamics damping="0.0001" friction="0.0"/>
+  </joint>
+
+  <!-- Rueda media izquierda: MOTOR N20 -->
+  <link name="rueda_media_izquierda_Link">
+    <inertial>
+      <origin xyz="1.17961e-16 1.85751e-16 0.00940086" rpy="0 0 0"/>
+      <mass value="0.0101299"/>
+      <inertia ixx="1.16862e-06" ixy="-1.12703e-22" ixz="-3.8289e-22" iyy="1.16862e-06" iyz="-7.97245e-22" izz="1.46736e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://carro_trepador_description/meshes/rueda_media_izquierda_Link.STL"/>
+      </geometry>
+      <material name="rueda_media_izquierda_Link_color">
+        <color rgba="0.694118 0.0980392 0.0980392 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.011" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.015" length="0.022"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="rueda_media_izquierda_joint" type="continuous">
+    <origin xyz="0.075676 0.0939 0.007" rpy="1.5708 0.0017968 0"/>
+    <parent link="chasis_trasero_link"/>
+    <child link="rueda_media_izquierda_Link"/>
+    <!-- Eje invertido respecto a la exportación: velocidad positiva = avanzar -->
+    <axis xyz="0 0 -1"/>
+    <dynamics damping="0.0001" friction="0.0"/>
+  </joint>
+
+  <!-- Hélice de la turbina trasera (solo visual, sin colisión) -->
+  <link name="helice_trasera_link">
+    <inertial>
+      <origin xyz="-8.52668e-08 4.11093e-07 -0.00272532" rpy="0 0 0"/>
+      <mass value="0.00076711"/>
+      <inertia ixx="6.52743e-08" ixy="8.16885e-11" ixz="-1.54797e-13" iyy="6.52197e-08" iyz="-5.43618e-13" izz="1.27832e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://carro_trepador_description/meshes/helice_trasera_link.STL"/>
+      </geometry>
+      <material name="helice_trasera_link_color">
+        <color rgba="1 0.415686 0 1"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="helice_trasera_joint" type="continuous">
+    <origin xyz="0.017176 0 0.02102" rpy="0 0 0"/>
+    <parent link="chasis_trasero_link"/>
+    <child link="helice_trasera_link"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!-- IMU trasera (GY-521 / MPU6050): posición del chip tomada del ensamble de SolidWorks.
+       Placa plana, chip hacia arriba, lado largo hacia adelante, del lado derecho del módulo.
+       Supuesto: el eje X del sensor apunta hacia adelante. Verificar con la serigrafía de la placa. -->
+  <link name="imu_rear_link"/>
+  <joint name="imu_rear_joint" type="fixed">
+    <origin xyz="-0.0024 -0.054 0.0186" rpy="0 0 0"/>
+    <parent link="chasis_trasero_link"/>
+    <child link="imu_rear_link"/>
+  </joint>
+
+  <!-- ===================== Articulación central ===================== -->
+  <!-- PASIVA: sin motor, el módulo delantero se dobla en pitch al pasar del suelo a la pared -->
+  <joint name="chasis_trasero_joint" type="revolute">
+    <origin xyz="0.083176 -0.03 0.004" rpy="1.5708 0 0"/>
+    <parent link="chasis_trasero_link"/>
+    <child link="chasis_delantero_link"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.5708" upper="1.5708" effort="10" velocity="1"/>
+    <dynamics damping="0.001" friction="0.0"/>
+  </joint>
+
+  <!-- ===================== Módulo delantero ===================== -->
+  <!-- Su marco está girado 90° en x respecto al trasero: aquí y = arriba, z = lateral -->
+  <link name="chasis_delantero_link">
+    <inertial>
+      <origin xyz="0.0941408 0.00650779 -0.0298937" rpy="0 0 0"/>
+      <mass value="0.1516"/>
+      <inertia ixx="0.000161369" ixy="-1.0865e-05" ixz="-1.95383e-07" iyy="0.000338517" iyz="-6.9859e-08" izz="0.000210796"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://carro_trepador_description/meshes/chasis_delantero_link.STL"/>
+      </geometry>
+      <material name="chasis_delantero_link_color">
+        <color rgba="0.698039 0.698039 0.698039 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0767 0.02345 -0.03" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1614 0.0629 0.1818"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Rueda delantera derecha: MOTOR N20 -->
+  <link name="rueda_delantera_derecha_Link">
+    <inertial>
+      <origin xyz="8.32667e-17 -2.03749e-16 -0.00940086" rpy="0 0 0"/>
+      <mass value="0.0101299"/>
+      <inertia ixx="1.16862e-06" ixy="1.40621e-23" ixz="3.50644e-22" iyy="1.16862e-06" iyz="-6.69696e-22" izz="1.46736e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://carro_trepador_description/meshes/rueda_delantera_derecha_Link.STL"/>
+      </geometry>
+      <material name="rueda_delantera_derecha_Link_color">
+        <color rgba="0.694118 0.0980392 0.0980392 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.011" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.015" length="0.022"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="rueda_delantera_derecha_joint" type="continuous">
+    <origin xyz="0.14451 0.0027404 0.0639" rpy="0 0 -0.0017968"/>
+    <parent link="chasis_delantero_link"/>
+    <child link="rueda_delantera_derecha_Link"/>
+    <!-- Eje invertido respecto a la exportación: velocidad positiva = avanzar -->
+    <axis xyz="0 0 -1"/>
+    <dynamics damping="0.0001" friction="0.0"/>
+  </joint>
+
+  <!-- Rueda delantera izquierda: MOTOR N20 -->
+  <link name="rueda_delantera_izquierda_Link">
+    <inertial>
+      <origin xyz="-1.94289e-16 -1.66913e-16 0.00940086" rpy="0 0 0"/>
+      <mass value="0.0101299"/>
+      <inertia ixx="1.16862e-06" ixy="8.23045e-23" ixz="2.5798e-22" iyy="1.16862e-06" iyz="6.48958e-22" izz="1.46736e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://carro_trepador_description/meshes/rueda_delantera_izquierda_Link.STL"/>
+      </geometry>
+      <material name="rueda_delantera_izquierda_Link_color">
+        <color rgba="0.694118 0.0980392 0.0980392 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.011" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.015" length="0.022"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="rueda_delantera_izquierda_joint" type="continuous">
+    <origin xyz="0.14451 0.0027404 -0.1239" rpy="0 0 -0.0017968"/>
+    <parent link="chasis_delantero_link"/>
+    <child link="rueda_delantera_izquierda_Link"/>
+    <!-- Eje invertido respecto a la exportación: velocidad positiva = avanzar -->
+    <axis xyz="0 0 -1"/>
+    <dynamics damping="0.0001" friction="0.0"/>
+  </joint>
+
+  <!-- Hélice de la turbina delantera (solo visual, sin colisión) -->
+  <link name="helice_delantera_link">
+    <inertial>
+      <origin xyz="-5.50488e-07 -2.32204e-07 -0.00272532" rpy="0 0 0"/>
+      <mass value="0.000767098"/>
+      <inertia ixx="6.51905e-08" ixy="-5.99257e-11" ixz="5.79836e-13" iyy="6.52992e-08" iyz="1.94077e-13" izz="1.27828e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://carro_trepador_description/meshes/helice_delantera_link.STL"/>
+      </geometry>
+      <material name="helice_delantera_link_color">
+        <color rgba="0.752941 0.752941 0.752941 1"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="helice_delantera_joint" type="continuous">
+    <origin xyz="0.069799 0.018025 -0.030006" rpy="-1.5708 0 -0.0017968"/>
+    <parent link="chasis_delantero_link"/>
+    <child link="helice_delantera_link"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!-- IMU delantera (GY-521 / MPU6050): posición del chip tomada del ensamble de SolidWorks.
+       Placa plana, chip hacia arriba, lado largo hacia adelante, del lado derecho del módulo.
+       El giro de -90° en x compensa el marco girado del chasis delantero (queda x adelante, z arriba).
+       Mismo supuesto que la trasera sobre el eje X del sensor. -->
+  <link name="imu_front_link"/>
+  <joint name="imu_front_joint" type="fixed">
+    <origin xyz="0.0245 0.0125 0.01" rpy="-1.5708 0 0"/>
+    <parent link="chasis_delantero_link"/>
+    <child link="imu_front_link"/>
+  </joint>
+
+  <!-- ===================== Gazebo (Fortress) ===================== -->
+  <!-- RViz ignora estos bloques. -->
+
+  <!-- Fricción de las llantas: alta al rodar (mu2 = 1.0) y baja de lado (mu1 = 0.3,
+       en la dirección del eje, fdir1). Con fricción igual en todas las direcciones el
+       robot NO gira en Gazebo: 6 ruedas en fila frenan el giro. Probado: con mu1 = 0.3
+       gira bien; con 0.5 o más casi no gira. Ver nota en el README. -->
+  <gazebo reference="rueda_trasera_derecha_link">
+    <mu1>0.3</mu1>
+    <mu2>1.0</mu2>
+    <fdir1>0 0 1</fdir1>
+  </gazebo>
+  <gazebo reference="rueda_trasera_izquierda_link">
+    <mu1>0.3</mu1>
+    <mu2>1.0</mu2>
+    <fdir1>0 0 1</fdir1>
+  </gazebo>
+  <gazebo reference="rueda_media_derecha_link">
+    <mu1>0.3</mu1>
+    <mu2>1.0</mu2>
+    <fdir1>0 0 1</fdir1>
+  </gazebo>
+  <gazebo reference="rueda_media_izquierda_Link">
+    <mu1>0.3</mu1>
+    <mu2>1.0</mu2>
+    <fdir1>0 0 1</fdir1>
+  </gazebo>
+  <gazebo reference="rueda_delantera_derecha_Link">
+    <mu1>0.3</mu1>
+    <mu2>1.0</mu2>
+    <fdir1>0 0 1</fdir1>
+  </gazebo>
+  <gazebo reference="rueda_delantera_izquierda_Link">
+    <mu1>0.3</mu1>
+    <mu2>1.0</mu2>
+    <fdir1>0 0 1</fdir1>
+  </gazebo>
+
+  <!-- Chasis con poca fricción, por si tocan el suelo en una transición -->
+  <gazebo reference="chasis_trasero_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+  <gazebo reference="chasis_delantero_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+
+  <!-- IMUs simuladas. Publican en los mismos tópicos que el firmware real. -->
+  <gazebo reference="imu_rear_link">
+    <sensor name="imu_rear" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <topic>imu/rear/data</topic>
+      <ignition_frame_id>imu_rear_link</ignition_frame_id>
+    </sensor>
+  </gazebo>
+  <gazebo reference="imu_front_link">
+    <sensor name="imu_front" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <topic>imu/front/data</topic>
+      <ignition_frame_id>imu_front_link</ignition_frame_id>
+    </sensor>
+  </gazebo>
+
+  <gazebo>
+    <!-- Tracción solo para PRUEBAS en simulación: mueve las 4 ruedas con motor
+         a partir de /sim/cmd_vel. No forma parte de la arquitectura del robot real. -->
+    <plugin filename="ignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
+      <left_joint>rueda_media_izquierda_joint</left_joint>
+      <left_joint>rueda_delantera_izquierda_joint</left_joint>
+      <right_joint>rueda_media_derecha_joint</right_joint>
+      <right_joint>rueda_delantera_derecha_joint</right_joint>
+      <!-- Distancia entre los centros de las llantas (eje a ±93.9 mm, llanta 11 mm hacia adentro) -->
+      <wheel_separation>0.1658</wheel_separation>
+      <wheel_radius>0.015</wheel_radius>
+      <topic>sim/cmd_vel</topic>
+      <odom_topic>sim/odom</odom_topic>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+      <odom_publish_frequency>30</odom_publish_frequency>
+    </plugin>
+
+    <!-- Publica el ángulo de todas las articulaciones (incluida la central) -->
+    <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher">
+      <topic>joint_states</topic>
+    </plugin>
+  </gazebo>
+
+</robot>

@@ -29,6 +29,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            # Herramienta de prueba: hace de ESP32 en el PC (no es parte de la arquitectura)
+            'firmware_simulado = carro_trepador_bringup.firmware_simulado:main',
         ],
     },
 )

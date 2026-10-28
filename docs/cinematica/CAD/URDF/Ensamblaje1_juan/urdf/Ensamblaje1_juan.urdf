@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Ensamblaje1_juan">
+  <link
+    name="chasis_trasero_link">
+    <inertial>
+      <origin
+        xyz="-0.0158575511616777 0.000531638352664607 0.0101393434625862"
+        rpy="0 0 0" />
+      <mass
+        value="0.195853503730635" />
+      <inertia
+        ixx="0.000166021256012164"
+        ixy="5.73580606085256E-07"
+        ixz="-4.25010569003643E-06"
+        iyy="0.00017722280679267"
+        iyz="-1.04426010499048E-07"
+        izz="0.000321224175072123" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/chasis_trasero_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.698039215686274 0.698039215686274 0.698039215686274 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/chasis_trasero_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="rueda_trasera_derecha_link">
+    <inertial>
+      <origin
+        xyz="-2.35922392732846E-16 -2.42861286636753E-17 -0.00995721638460603"
+        rpy="0 0 0" />
+      <mass
+        value="0.0104190124090094" />
+      <inertia
+        ixx="1.25231602494747E-06"
+        ixy="1.32348898008484E-23"
+        ixz="-7.33877134805272E-22"
+        iyy="1.25231602494747E-06"
+        iyz="-1.49829002682653E-22"
+        izz="1.46758632490156E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/rueda_trasera_derecha_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/rueda_trasera_derecha_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rueda_trasera_derecha_joint"
+    type="fixed">
+    <origin
+      xyz="-0.064324 -0.0939 0.007"
+      rpy="1.5708 -0.097375 0" />
+    <parent
+      link="chasis_trasero_link" />
+    <child
+      link="rueda_trasera_derecha_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="rueda_trasera_izquierda_link">
+    <inertial>
+      <origin
+        xyz="-1.11022302462516E-16 -1.96511643762998E-16 0.00995721638460604"
+        rpy="0 0 0" />
+      <mass
+        value="0.0104190124090094" />
+      <inertia
+        ixx="1.25231602494747E-06"
+        ixy="-1.45953475040116E-22"
+        ixz="3.44708668595202E-22"
+        iyy="1.25231602494747E-06"
+        iyz="8.68983363337935E-22"
+        izz="1.46758632490156E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/rueda_trasera_izquierda_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/rueda_trasera_izquierda_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rueda_trasera_izquierda_joint"
+    type="fixed">
+    <origin
+      xyz="-0.064324 0.0939 0.007"
+      rpy="1.5708 0 0" />
+    <parent
+      link="chasis_trasero_link" />
+    <child
+      link="rueda_trasera_izquierda_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="rueda_media_derecha_link">
+    <inertial>
+      <origin
+        xyz="1.59594559789866E-16 -1.47695440946838E-16 -0.00940085827335935"
+        rpy="0 0 0" />
+      <mass
+        value="0.0101298877101087" />
+      <inertia
+        ixx="1.16861689422253E-06"
+        ixy="1.81634840861153E-22"
+        ixz="5.89048664461853E-22"
+        iyy="1.16861689422253E-06"
+        iyz="-5.44703753955961E-22"
+        izz="1.46736044623054E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/rueda_media_derecha_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.694117647058824 0.0980392156862745 0.0980392156862745 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/rueda_media_derecha_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rueda_media_derecha_joint"
+    type="continuous">
+    <origin
+      xyz="0.075676 -0.0939 0.007"
+      rpy="1.5708 0 0" />
+    <parent
+      link="chasis_trasero_link" />
+    <child
+      link="rueda_media_derecha_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="rueda_media_izquierda_Link">
+    <inertial>
+      <origin
+        xyz="1.17961196366423E-16 1.85750937201079E-16 0.00940085827335936"
+        rpy="0 0 0" />
+      <mass
+        value="0.0101298877101087" />
+      <inertia
+        ixx="1.16861689422253E-06"
+        ixy="-1.1270335846035E-22"
+        ixz="-3.82889771208034E-22"
+        iyy="1.16861689422253E-06"
+        iyz="-7.97244960916793E-22"
+        izz="1.46736044623054E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/rueda_media_izquierda_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.694117647058824 0.0980392156862745 0.0980392156862745 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/rueda_media_izquierda_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rueda_media_izquierda_joint"
+    type="continuous">
+    <origin
+      xyz="0.075676 0.0939 0.007"
+      rpy="1.5708 0.0017968 0" />
+    <parent
+      link="chasis_trasero_link" />
+    <child
+      link="rueda_media_izquierda_Link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="helice_trasera_link">
+    <inertial>
+      <origin
+        xyz="-8.52667519591005E-08 4.11093228416815E-07 -0.00272532365909728"
+        rpy="0 0 0" />
+      <mass
+        value="0.000767110475009666" />
+      <inertia
+        ixx="6.52743158106174E-08"
+        ixy="8.16884543414592E-11"
+        ixz="-1.54796508725946E-13"
+        iyy="6.52196980054335E-08"
+        iyz="-5.43618074677721E-13"
+        izz="1.27831875737415E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/helice_trasera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.415686274509804 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/helice_trasera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="helice_trasera_joint"
+    type="continuous">
+    <origin
+      xyz="0.017176 0 0.02102"
+      rpy="0 0 0" />
+    <parent
+      link="chasis_trasero_link" />
+    <child
+      link="helice_trasera_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="chasis_delantero_link">
+    <inertial>
+      <origin
+        xyz="0.0941408327686579 0.00650779264046262 -0.0298937456317151"
+        rpy="0 0 0" />
+      <mass
+        value="0.1516002654948" />
+      <inertia
+        ixx="0.000161369474545811"
+        ixy="-1.08649769592539E-05"
+        ixz="-1.95383060064165E-07"
+        iyy="0.00033851692080424"
+        iyz="-6.98590201082011E-08"
+        izz="0.000210795521466371" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/chasis_delantero_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.698039215686274 0.698039215686274 0.698039215686274 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/chasis_delantero_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="chasis_trasero_joint"
+    type="revolute">
+    <origin
+      xyz="0.083176 -0.03 0.004"
+      rpy="1.5708 0 0" />
+    <parent
+      link="chasis_trasero_link" />
+    <child
+      link="chasis_delantero_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.5708"
+      upper="1.5708"
+      effort="10"
+      velocity="1" />
+  </joint>
+  <link
+    name="rueda_delantera_derecha_Link">
+    <inertial>
+      <origin
+        xyz="8.32667268468867E-17 -2.03748693264338E-16 -0.00940085827335935"
+        rpy="0 0 0" />
+      <mass
+        value="0.0101298877101087" />
+      <inertia
+        ixx="1.16861689422253E-06"
+        ixy="1.40620704134015E-23"
+        ixz="3.50644422996283E-22"
+        iyy="1.16861689422253E-06"
+        iyz="-6.69695711517854E-22"
+        izz="1.46736044623054E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/rueda_delantera_derecha_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.694117647058824 0.0980392156862745 0.0980392156862745 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/rueda_delantera_derecha_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rueda_delantera_derecha_joint"
+    type="continuous">
+    <origin
+      xyz="0.14451 0.0027404 0.0639"
+      rpy="0 0 -0.0017968" />
+    <parent
+      link="chasis_delantero_link" />
+    <child
+      link="rueda_delantera_derecha_Link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="rueda_delantera_izquierda_Link">
+    <inertial>
+      <origin
+        xyz="-1.94289029309402E-16 -1.66912924454143E-16 0.00940085827335935"
+        rpy="0 0 0" />
+      <mass
+        value="0.0101298877101087" />
+      <inertia
+        ixx="1.16861689422253E-06"
+        ixy="8.23044709490259E-23"
+        ixz="2.57979873752233E-22"
+        iyy="1.16861689422253E-06"
+        iyz="6.48957949857958E-22"
+        izz="1.46736044623054E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/rueda_delantera_izquierda_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.694117647058824 0.0980392156862745 0.0980392156862745 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/rueda_delantera_izquierda_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rueda_delantera_izquierda_joint"
+    type="continuous">
+    <origin
+      xyz="0.14451 0.0027404 -0.1239"
+      rpy="0 0 -0.0017968" />
+    <parent
+      link="chasis_delantero_link" />
+    <child
+      link="rueda_delantera_izquierda_Link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="helice_delantera_link">
+    <inertial>
+      <origin
+        xyz="-5.50487598921512E-07 -2.32203756792004E-07 -0.00272532001852913"
+        rpy="0 0 0" />
+      <mass
+        value="0.000767098383051616" />
+      <inertia
+        ixx="6.51904854409878E-08"
+        ixy="-5.99257254153706E-11"
+        ixz="5.79836150660766E-13"
+        iyy="6.52992140166565E-08"
+        iyz="1.94077305046825E-13"
+        izz="1.27827565607198E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/helice_delantera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Ensamblaje1_juan/meshes/helice_delantera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="helice_delantera_joint"
+    type="continuous">
+    <origin
+      xyz="0.069799 0.018025 -0.030006"
+      rpy="-1.5708 0 -0.0017968" />
+    <parent
+      link="chasis_delantero_link" />
+    <child
+      link="helice_delantera_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+</robot>

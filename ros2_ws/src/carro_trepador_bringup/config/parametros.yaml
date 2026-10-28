@@ -1,0 +1,44 @@
+# Parámetros de todos los nodos del robot trepador, en un solo lugar.
+# Se cargan con bringup.launch.py. Después de cambiar algo: colcon build y volver a lanzar
+# (o cambiarlo en vivo con: ros2 param set /<nodo> <parametro> <valor>).
+# Los ángulos van en grados, las velocidades en m/s y rad/s y la succión en % (0-100).
+
+state_machine_node:
+  ros__parameters:
+    velocidad_lineal_max: 0.25
+    velocidad_angular_max: 1.5
+    factor_modo_prueba: 0.3       # velocidad en modo prueba = máximo × este factor
+    factor_transicion: 0.5        # velocidad durante el paso suelo <-> pared
+    succion_max_modo_prueba: 30.0
+    succion_min_pared: 60.0       # succión mínima garantizada fuera del suelo
+    umbral_suelo_grados: 25.0
+    umbral_pared_grados: 65.0
+    timeout_cmd_vel: 0.5          # s sin órdenes de la GUI -> velocidad 0
+    timeout_imu: 0.2
+    timeout_firmware: 1.0
+    celdas_bateria: 4
+
+kinematics_node:
+  ros__parameters:
+    separacion_ruedas: 0.1658     # m, distancia entre llantas izquierda y derecha (URDF)
+    velocidad_max_rueda: 0.39     # m/s, N20 de 300 RPM a 6 V; a 5 V (BEC) unos 250 RPM, llanta de 15 mm
+
+suction_control_node:
+  ros__parameters:
+    umbral_suelo_grados: 25.0
+    umbral_pared_grados: 65.0
+    succion_suelo: 0.0
+    succion_pared: 70.0
+    rampa_subida: 200.0           # %/s
+    rampa_bajada: 25.0            # %/s
+    timeout_imu: 0.2
+
+joint_state_estimator_node:
+  ros__parameters:
+    marco_fijo: odom
+    filtro: 0.2                   # 1 = sin suavizado
+
+custom_gui_node:
+  ros__parameters:
+    velocidad_lineal_max: 0.25
+    velocidad_angular_max: 1.5

@@ -1,0 +1,1 @@
+controller_joint_names: ['', 'rueda_media_derecha_joint', 'rueda_media_izquierda_joint', 'helice_trasera_joint', 'chasis_trasero_joint', 'rueda_delantera_derecha_joint', 'rueda_delantera_izquierda_joint', 'helice_delantera_joint', ]

@@ -1,0 +1,51 @@
+N.º,Grupo,Desde,Hacia,Tipo,Nota
+1,Potencia,Batería · + (rojo),XT30 · + (lado robot),Batería 4S,El XT30 es el interruptor general. Cable 16 AWG o más grueso
+2,Potencia,XT30 · +,Fusible 40 A · entrada,Batería 4S,Recomendado
+3,Potencia,Fusible · salida,Shunt 1 mΩ · lado batería,Batería 4S,
+4,Potencia,Shunt · lado carga,ESC delantero · B+ (rojo grueso),Batería 4S,
+5,Potencia,Shunt · lado carga,ESC trasero · B+ (rojo grueso),Batería 4S,
+6,Potencia,Batería · − (negro),XT30 · − (lado robot),GND,
+7,Potencia,XT30 · −,ESC delantero · B− (negro grueso),GND,
+8,Potencia,XT30 · −,ESC trasero · B− (negro grueso),GND,
+9,Potencia,Shunt · lado batería,INA226 · IN+,Medición,Cable fino soldado en el cuerpo del shunt (Kelvin); quitar la R100 del módulo
+10,Potencia,Shunt · lado carga,INA226 · IN−,Medición,Cable fino soldado en el cuerpo del shunt (Kelvin)
+11,Potencia,INA226 · VBS,INA226 · IN−,Medición,Para medir el voltaje de la batería
+12,Potencia,DRV8833 · GND,ESP32 · GND,GND,Retorno del BEC delantero y referencia de los PWM
+13,Potencia,ESC delantero · 3 fases,BLDC delantero,Fases,Invertir dos cables cambia el giro
+14,Potencia,ESC trasero · 3 fases,BLDC trasero,Fases,Invertir dos cables cambia el giro
+15,IMU delantera,ESP32 · 5V,GY-521 delantero · VCC,5 V,Regulador propio: sus señales quedan en 3.3 V
+16,IMU delantera,ESP32 · GND,GY-521 delantero · GND,GND,
+17,IMU delantera,ESP32 · GPIO 1,GY-521 delantero · SDA,I2C SDA,Bus compartido
+18,IMU delantera,ESP32 · GPIO 14,GY-521 delantero · SCL,I2C SCL,Bus compartido
+19,IMU delantera,ESP32 · GPIO 21,GY-521 delantero · INT,Interrupción,"Dato listo, 100 Hz"
+20,IMU delantera,GY-521 delantero · AD0,GND,Dirección,Dirección I2C 0x68
+21,IMU trasera,ESP32 · 5V,GY-521 trasero · VCC,5 V,Regulador propio: sus señales quedan en 3.3 V
+22,IMU trasera,ESP32 · GND,GY-521 trasero · GND,GND,
+23,IMU trasera,ESP32 · GPIO 1,GY-521 trasero · SDA,I2C SDA,Bus compartido
+24,IMU trasera,ESP32 · GPIO 14,GY-521 trasero · SCL,I2C SCL,Bus compartido
+25,IMU trasera,ESP32 · GPIO 47,GY-521 trasero · INT,Interrupción,"Dato listo, 100 Hz"
+26,IMU trasera,GY-521 trasero · AD0,ESP32 · 3V3,Dirección,"Dirección I2C 0x69. A 3V3, NO a 5 V"
+27,INA226,ESP32 · 3V3,INA226 · VCC,3.3 V,NUNCA 5 V: sus pull-ups pondrían 5 V en la ESP32
+28,INA226,ESP32 · GND,INA226 · GND,GND,
+29,INA226,ESP32 · GPIO 1,INA226 · SDA,I2C SDA,Bus compartido; dirección 0x40
+30,INA226,ESP32 · GPIO 14,INA226 · SCL,I2C SCL,Bus compartido
+31,INA226,ESP32 · GPIO 3,INA226 · ALE,Alerta,Compartido con ULT del DRV8833
+32,DRV8833,ESP32 · GPIO 38,DRV8833 · IN1,PWM 20 kHz,Lado izquierdo
+33,DRV8833,ESP32 · GPIO 39,DRV8833 · IN2,PWM 20 kHz,Lado izquierdo
+34,DRV8833,ESP32 · GPIO 40,DRV8833 · IN3,PWM 20 kHz,Lado derecho
+35,DRV8833,ESP32 · GPIO 2,DRV8833 · IN4,PWM 20 kHz,Lado derecho; el LED azul de la placa lo acompaña
+36,DRV8833,ESP32 · GPIO 3,DRV8833 · ULT,Falla,Compartido con ALE; medir su voltaje antes
+37,DRV8833,DRV8833 · EEP,Sin conectar,—,J1 cerrado: queda en VCC (5 V)
+38,DRV8833,DRV8833 · OUT1,N20 medio izq. (+) y N20 delantero izq. (+),Motor,En paralelo
+39,DRV8833,DRV8833 · OUT2,N20 medio izq. (−) y N20 delantero izq. (−),Motor,En paralelo
+40,DRV8833,DRV8833 · OUT3,N20 medio der. (+) y N20 delantero der. (+),Motor,En paralelo
+41,DRV8833,DRV8833 · OUT4,N20 medio der. (−) y N20 delantero der. (−),Motor,En paralelo
+42,ESC,ESP32 · GPIO 41,ESC delantero · blanco (señal),PWM 50 Hz,1000-2000 µs
+43,ESC,ESP32 · GND,ESC delantero · negro fino,GND,Obligatorio para la señal
+44,ESC,ESC delantero · rojo fino (BEC),DRV8833 · VCC,5 V (motores),BEC delantero: alimenta solo el DRV8833. Nunca unirlo con el otro rojo de BEC
+45,ESC,ESC delantero · amarillo,Sin conectar,—,Aislar la punta
+46,ESC,ESP32 · GPIO 42,ESC trasero · blanco (señal),PWM 50 Hz,1000-2000 µs
+47,ESC,ESP32 · GND,ESC trasero · negro fino,GND,Obligatorio para la señal
+48,ESC,ESC trasero · rojo fino (BEC),ESP32 · 5V,5 V (lógica),BEC trasero: ESP32 y GY-521. Desconectarlo mientras el USB esté conectado
+49,ESC,ESC trasero · amarillo,Sin conectar,—,Aislar la punta
+50,Otros,GY-521 · XDA y XCL,Sin conectar,—,"Bus auxiliar, no se usa"

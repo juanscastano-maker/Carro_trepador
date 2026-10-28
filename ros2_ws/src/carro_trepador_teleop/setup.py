@@ -15,8 +15,8 @@ setup(
     zip_safe=True,
     maintainer='juan',
     maintainer_email='juan_s.castano@uao.edu.co',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    description='Interfaz gráfica PyQt para teleoperar el robot trepador',
+    license='Apache-2.0',
     extras_require={
         'test': [
             'pytest',
@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'custom_gui_node = carro_trepador_teleop.custom_gui_node:main',
         ],
     },
 )

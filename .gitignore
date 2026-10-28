@@ -54,3 +54,6 @@ Thumbs.db
 *.swp
 *~
 *.log
+
+# Credenciales Wi-Fi del firmware (no subir contraseñas)
+firmware/include/credenciales_wifi.h
